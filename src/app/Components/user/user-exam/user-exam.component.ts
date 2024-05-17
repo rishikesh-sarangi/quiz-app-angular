@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { ExamQuestionsService } from 'src/app/Shared/Services/exam-questions.service';
-import { ChangeDetectorRef } from '@angular/core';
 import { MultiUseDialogComponent } from 'src/app/Shared/multi-use-dialog/multi-use-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ExamTab1Component } from './exam-tab-1/exam-tab-1.component';
@@ -16,10 +15,7 @@ import { ExamTab1Component } from './exam-tab-1/exam-tab-1.component';
   styleUrls: ['./user-exam.component.scss'],
 })
 export class UserExamComponent implements OnInit {
-  constructor(
-    private examQuestionService: ExamQuestionsService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private examQuestionService: ExamQuestionsService) {}
 
   questionArray: any = [];
 
@@ -40,29 +36,24 @@ export class UserExamComponent implements OnInit {
   }
 
   getExamQuestion(currentTab: number) {
-    let serviceMethod;
-
     if (currentTab === 0) {
-      serviceMethod = this.examQuestionService.getGeneralKnowledgeQuestions();
-    } else if (currentTab === 1) {
-      serviceMethod = this.examQuestionService.getAptitudeQuestions();
-    } else {
-      serviceMethod = this.examQuestionService.getLogicalReasoningQuestions();
-    }
-
-    serviceMethod.subscribe({
-      next: (data: any) => {
-        if (currentTab === 0) {
+      this.examQuestionService.getGeneralKnowledgeQuestions().subscribe({
+        next: (data) => {
           this.generalKnowledgeQuestions = data;
-        } else if (currentTab === 1) {
+        },
+      });
+    } else if (currentTab === 1) {
+      this.examQuestionService.getAptitudeQuestions().subscribe({
+        next: (data) => {
           this.aptitudeQuestions = data;
-        } else {
+        },
+      });
+    } else if (currentTab === 2) {
+      this.examQuestionService.getLogicalReasoningQuestions().subscribe({
+        next: (data) => {
           this.logicalReasoningQuestions = data;
-        }
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+        },
+      });
+    }
   }
 }

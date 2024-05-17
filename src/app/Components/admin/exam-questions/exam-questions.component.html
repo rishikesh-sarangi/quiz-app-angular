@@ -6,38 +6,42 @@
     style="margin: 20px 50px"
   >
     <mat-form-field>
-      <mat-label>Question Type</mat-label>
-      <input matInput formControlName="questionType" required />
+      <mat-select formControlName="questionType" placeholder="Question Type">
+        <mat-option
+          [value]="i"
+          *ngFor="let item of questionTypes; let i = index"
+          >{{ item }}</mat-option
+        >
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Question</mat-label>
-      <input matInput formControlName="question" required />
+      <input matInput formControlName="question" placeholder="Question" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Option 1</mat-label>
-      <input matInput formControlName="option1" required />
+      <input matInput formControlName="option1" placeholder="Option 1" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Option 2</mat-label>
-      <input matInput formControlName="option2" required />
+      <input matInput formControlName="option2" placeholder="Option2" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Option 3</mat-label>
-      <input matInput formControlName="option3" required />
+      <input matInput formControlName="option3" placeholder="Option3" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Option 4</mat-label>
-      <input matInput formControlName="option4" required />
+      <input matInput formControlName="option4" placeholder="Option4" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Answer</mat-label>
-      <input matInput formControlName="answer" required />
+      <mat-select formControlName="answer" required>
+        <mat-option *ngFor="let option of answerOptions" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>
