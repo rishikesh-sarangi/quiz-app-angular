@@ -1,0 +1,33 @@
+<div class="home-component">
+  <mat-card class="main-card">
+    <h1>Todays Date is {{ todayDate | date }}</h1>
+    <h2>User, Enter your Details:</h2>
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="userReactiveForm"
+      class="main-form"
+    >
+      <mat-form-field appearance="outline" class="dense-form-field-5">
+        <input
+          matInput
+          formControlName="userName"
+          placeholder="Enter Your Name"
+        />
+        <mat-error>Field must not be empty</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="dense-form-field-5">
+        <input
+          matInput
+          formControlName="emailID"
+          placeholder="Enter Your Email"
+        />
+        <mat-error>Field must not be empty</mat-error>
+      </mat-form-field>
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" type="submit">
+          Continue
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

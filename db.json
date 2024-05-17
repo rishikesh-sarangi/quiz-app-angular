@@ -1,0 +1,200 @@
+{
+  "users": [
+    {
+      "email": "admin@admin.com",
+      "password": "admin",
+      "isAdmin": true
+    },
+    {
+      "email": "rishikesh@gmail.com",
+      "password": "root",
+      "isAdmin": false
+    }
+  ],
+  "examQuestions": [
+    {
+      "generalKnowledge": [
+        {
+          "id": 1,
+          "question": "What is the capital of France?",
+          "option1": "Paris",
+          "option2": "London",
+          "option3": "Berlin",
+          "option4": "Rome",
+          "answer": "Paris"
+        },
+        {
+          "id": 2,
+          "question": "Who wrote 'To Kill a Mockingbird'?",
+          "option1": "Harper Lee",
+          "option2": "Stephen King",
+          "option3": "J.K. Rowling",
+          "option4": "Ernest Hemingway",
+          "answer": "Harper Lee"
+        },
+        {
+          "id": 3,
+          "question": "What is the chemical symbol for gold?",
+          "option1": "Au",
+          "option2": "Ag",
+          "option3": "Fe",
+          "option4": "Cu",
+          "answer": "Au"
+        },
+        {
+          "id": 4,
+          "question": "Who painted the Mona Lisa?",
+          "option1": "Leonardo da Vinci",
+          "option2": "Pablo Picasso",
+          "option3": "Vincent van Gogh",
+          "option4": "Michelangelo",
+          "answer": "Leonardo da Vinci"
+        },
+        {
+          "id": 5,
+          "question": "What is the tallest mammal?",
+          "option1": "Elephant",
+          "option2": "Giraffe",
+          "option3": "Horse",
+          "option4": "Gorilla",
+          "answer": "Giraffe"
+        }
+      ]
+    },
+    {
+      "aptitude": [
+        {
+          "id": 6,
+          "question": "Who developed the theory of relativity?",
+          "option1": "Isaac Newton",
+          "option2": "Albert Einstein",
+          "option3": "Galileo Galilei",
+          "option4": "Nikola Tesla",
+          "answer": "Albert Einstein"
+        },
+        {
+          "id": 7,
+          "question": "What is the powerhouse of the cell?",
+          "option1": "Mitochondria",
+          "option2": "Nucleus",
+          "option3": "Ribosome",
+          "option4": "Golgi apparatus",
+          "answer": "Mitochondria"
+        },
+        {
+          "id": 8,
+          "question": "Which planet is known as the Red Planet?",
+          "option1": "Mars",
+          "option2": "Venus",
+          "option3": "Jupiter",
+          "option4": "Saturn",
+          "answer": "Mars"
+        },
+        {
+          "id": 9,
+          "question": "What is the chemical formula for water?",
+          "option1": "H2O",
+          "option2": "CO2",
+          "option3": "NaCl",
+          "option4": "C6H12O6",
+          "answer": "H2O"
+        },
+        {
+          "id": 10,
+          "question": "Who is credited with inventing the telephone?",
+          "option1": "Thomas Edison",
+          "option2": "Alexander Graham Bell",
+          "option3": "Nikola Tesla",
+          "option4": "Guglielmo Marconi",
+          "answer": "Alexander Graham Bell"
+        }
+      ]
+    },
+    {
+      "logicalReasoning": [
+        {
+          "id": 11,
+          "question": "What is the longest river in the world?",
+          "option1": "Amazon",
+          "option2": "Nile",
+          "option3": "Mississippi",
+          "option4": "Yangtze",
+          "answer": "Nile"
+        },
+        {
+          "id": 12,
+          "question": "Who wrote 'Hamlet'?",
+          "option1": "William Shakespeare",
+          "option2": "Charles Dickens",
+          "option3": "Jane Austen",
+          "option4": "Fyodor Dostoevsky",
+          "answer": "William Shakespeare"
+        },
+        {
+          "id": 13,
+          "question": "What is the chemical symbol for iron?",
+          "option1": "Ir",
+          "option2": "Fe",
+          "option3": "In",
+          "option4": "Au",
+          "answer": "Fe"
+        },
+        {
+          "id": 14,
+          "question": "What is the largest ocean on Earth?",
+          "option1": "Atlantic Ocean",
+          "option2": "Indian Ocean",
+          "option3": "Arctic Ocean",
+          "option4": "Pacific Ocean",
+          "answer": "Pacific Ocean"
+        },
+        {
+          "id": 15,
+          "question": "Who painted the Sistine Chapel ceiling?",
+          "option1": "Leonardo da Vinci",
+          "option2": "Raphael",
+          "option3": "Michelangelo",
+          "option4": "Donatello",
+          "answer": "Michelangelo"
+        }
+      ]
+    }
+  ],
+  "examType": [
+    {
+      "date": "2024-05-17T05:37:03.915Z",
+      "type": 1,
+      "id": 1
+    }
+  ],
+  "examResults": [
+    {
+      "date": "2024-05-17T05:37:03.915Z",
+      "examType": 1,
+      "userName": "rishikesh",
+      "emailID": "rishikesh@gmail.com",
+      "id": 1
+    },
+    {
+      "date": "2024-05-17T05:37:03.915Z",
+      "examType": 1,
+      "userName": "ananya",
+      "emailID": "anany@gmail.com",
+      "id": 2
+    },
+    {
+      "date": "2024-05-17T05:37:03.915Z",
+      "examType": 1,
+      "userName": "test",
+      "emailID": "test@gmail.com",
+      "id": 3
+    },
+    {
+      "date": "2024-05-17T05:37:03.915Z",
+      "examType": 1,
+      "userName": "rishikesh",
+      "emailID": "rishikesh@gmaiul.com",
+      "id": 4
+    }
+  ]
+}

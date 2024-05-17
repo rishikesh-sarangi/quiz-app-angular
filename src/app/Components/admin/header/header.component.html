@@ -1,0 +1,98 @@
+<mat-toolbar color="primary" class="header">
+  <!-- header top -->
+  <mat-toolbar-row>
+    <div class="navbar-left">
+      <img
+        src="../../../../assets/images/cozentuslogo.png"
+        alt="cozentuslogo"
+        class="company-logo"
+      />
+    </div>
+    <div class="navbar-right">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon
+          ><span
+            class="material-icons-outlined material-icons-outlined-customzied"
+          >
+            face
+          </span></mat-icon
+        >
+        <span class="mat-h2 white-text user-name">Admin</span>
+        <mat-icon iconPositionEnd><span> expand_more </span></mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+
+  <!-- navbar -->
+  <mat-toolbar-row style="margin-top: 5px">
+    <!-- home -->
+    <button
+      mat-button
+      class="navbar-buttons"
+      routerLink="home"
+      routerLinkActive="activeColor"
+    >
+      <mat-icon
+        ><span
+          class="material-icons-outlined material-icons-outlined-customzied"
+        >
+          home
+        </span>
+      </mat-icon>
+
+      <span class="white-text">Home</span>
+    </button>
+
+    <!-- DashBoard -->
+    <button
+      mat-button
+      class="navbar-buttons"
+      routerLink="dashboard"
+      routerLinkActive="activeColor"
+    >
+      <mat-icon>
+        <span
+          class="material-symbols-outlined material-icons-outlined-customzied"
+        >
+          dashboard
+        </span>
+      </mat-icon>
+
+      <span class="white-text">Dashboard</span>
+    </button>
+
+    <!-- Exam Question -->
+    <button
+      mat-button
+      class="navbar-buttons"
+      routerLink="exam-question"
+      routerLinkActive="activeColor"
+    >
+      <mat-icon>
+        <span
+          class="material-symbols-outlined material-icons-outlined-customzied"
+        >
+          dashboard
+        </span>
+      </mat-icon>
+
+      <span class="white-text">Exam Questions</span>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- child components -->
+<router-outlet></router-outlet>
+
+<!-- logout menu -->
+<mat-menu #menu="matMenu" class="user-menu dense-3">
+  <span class="xs-user-name">Admin</span>
+  <button mat-menu-item (click)="logOut()" class="logout-btn">
+    <mat-icon>
+      <span class="material-icons-outlined white-text">
+        power_settings_new
+      </span>
+    </mat-icon>
+    <span class="white-text">Sign Out</span>
+  </button>
+</mat-menu>

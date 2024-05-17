@@ -1,0 +1,40 @@
+<div class="user-exam-component">
+  <ng-container *ngIf="!isExamFinished">
+    <mat-tab-group>
+      <mat-tab label="General Knowledge"
+        ><app-exam-tab-1
+          [questionArray]="generalKnowledgeQuestions"
+        ></app-exam-tab-1
+      ></mat-tab>
+      <mat-tab label="Aptitude">
+        <app-exam-tab-1 [questionArray]="aptitudeQuestions"></app-exam-tab-1
+      ></mat-tab>
+      <mat-tab label="Logical Reasoning">
+        <app-exam-tab-1
+          [questionArray]="logicalReasoningQuestions"
+        ></app-exam-tab-1>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+
+  <ng-container *ngIf="isExamFinished">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      style="margin-top: 50px"
+    >
+      <mat-card class="each-question">
+        <h1>You have scored {{ totalCorrect }} out of {{ totalQuestions }}.</h1>
+        <div style="font-size: 15px">
+          Total Correct Answers: {{ totalCorrect }}
+        </div>
+        <div style="font-size: 15px">
+          Total Wrong Answers : {{ totalWrong }}
+        </div>
+        <div style="font-size: 15px">
+          Total Unattended : {{ totalUnattended }}
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

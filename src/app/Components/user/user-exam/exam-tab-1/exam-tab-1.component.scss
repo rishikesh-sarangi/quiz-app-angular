@@ -1,0 +1,51 @@
+.each-question {
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  // margin: 10px;
+  border-radius: 8px;
+  width: 90% !important;
+  height: 78% !important;
+  // position: relative;
+  // overflow: hidden;
+}
+
+.mat-mdc-chip-set {
+  width: 200px;
+}
+
+.question-panel {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.question-buttons-card {
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+mat-radio-button {
+  width: 200px;
+}
+
+.answered-style {
+  background-color: greenyellow;
+  color: black;
+}
+
+.right-side-container {
+  width: 100%;
+}
+
+.bookmarked-style {
+  background-color: yellow;
+  color: black;
+}

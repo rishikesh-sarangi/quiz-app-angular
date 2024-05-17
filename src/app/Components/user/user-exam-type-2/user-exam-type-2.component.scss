@@ -1,0 +1,32 @@
+.main-card {
+  margin: 2rem 10rem;
+  padding: 2rem;
+  background-color: cornflowerblue;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.question {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.each-question {
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  margin: 10px;
+  border-radius: 8px;
+  width: 500px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-radio-button {
+  width: 200px;
+}

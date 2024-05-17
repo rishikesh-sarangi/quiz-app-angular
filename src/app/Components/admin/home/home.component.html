@@ -1,0 +1,24 @@
+<div class="home-component">
+  <mat-card class="main-card">
+    <h1>Todays Date is {{ todayDate | date }}</h1>
+    <h2>Admin, Select Exam Type:</h2>
+    <div class="action-buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        matTooltip="User gets to choose the answers as they like and evaluation is done in real time."
+        (click)="setExamType(true)"
+      >
+        Exam Type 1
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        matTooltip="User gets to choose the answers as they like and evaluation is done at the end."
+        (click)="setExamType(false)"
+      >
+        Exam Type 2
+      </button>
+    </div>
+  </mat-card>
+</div>

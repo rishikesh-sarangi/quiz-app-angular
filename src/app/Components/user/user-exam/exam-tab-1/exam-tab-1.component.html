@@ -1,0 +1,148 @@
+<div fxLayout="row" style="height: 100dvh" fxLayoutGap="10px">
+  <!-- left-side -->
+  <div class="left-side-container">
+    <!-- question selector -->
+    <mat-card class="question-panel">
+      <mat-card-header class="mat-h2">Questions</mat-card-header>
+      <mat-card-content class="question-buttons-card">
+        <button
+          mat-mini-fab
+          [color]="currentQuestion === i ? 'primary' : 'none'"
+          [ngClass]="{
+            'answered-style': isAnswered(i),
+            'bookmarked-style': isBookmarked(i) && !isAnswered(i)
+          }"
+          *ngFor="let question of questionArray; let i = index"
+          (click)="selectQuestion(i)"
+        >
+          {{ i + 1 }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- question selector legend -->
+    <mat-card class="question-panel">
+      <mat-card-header class="mat-h2">Legend</mat-card-header>
+      <mat-card-content class="legend">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button mat-mini-fab color="none" style="pointer-events: none">
+            1</button
+          ><span>Unattended</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button mat-mini-fab color="primary" style="pointer-events: none">
+            1</button
+          ><span>Selected</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button
+            mat-mini-fab
+            style="pointer-events: none; background-color: yellow; color: black"
+          >
+            1</button
+          ><span>Bookmarked</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button
+            mat-mini-fab
+            style="pointer-events: none"
+            class="answered-style"
+          >
+            1</button
+          ><span>Answered</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- right side -->
+  <div class="right-side-container" fxLayout="column">
+    <mat-card
+      class="each-question"
+      fxLayout="column"
+      fxLayoutAlign="space-between none"
+    >
+      <div>
+        <mat-card-header class="mat-h2"
+          >Q{{ currentQuestion + 1 }}.
+          {{ questionArray[currentQuestion]?.question }}</mat-card-header
+        >
+
+        <mat-card-content class="each-question-content">
+          <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="selectedAnswer"
+            (ngModelChange)="onOptionChange($event)"
+          >
+            <div fxLayout="row" fxLayoutGap="50px">
+              <mat-radio-button
+                [value]="questionArray[currentQuestion]?.option1"
+                >{{ questionArray[currentQuestion]?.option1 }}</mat-radio-button
+              >
+              <mat-radio-button
+                [value]="questionArray[currentQuestion]?.option2"
+                >{{ questionArray[currentQuestion]?.option2 }}</mat-radio-button
+              >
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="50px">
+              <mat-radio-button
+                [value]="questionArray[currentQuestion]?.option3"
+                >{{ questionArray[currentQuestion]?.option3 }}</mat-radio-button
+              >
+              <mat-radio-button
+                [value]="questionArray[currentQuestion]?.option4"
+                >{{ questionArray[currentQuestion]?.option4 }}</mat-radio-button
+              >
+            </div>
+          </mat-radio-group>
+        </mat-card-content>
+      </div>
+
+      <mat-card-footer fxLayout="row" fxLayoutAlign="space-between center">
+        <span style="font-size: 15px; font-weight: bold"
+          >Question: {{ currentQuestion + 1 }} / {{ totalQuestions }}</span
+        >
+        <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="10px">
+          <ng-container
+            *ngIf="currentQuestion > 0 && currentQuestion < totalQuestions"
+          >
+            <button mat-mini-fab color="primary" (click)="prevQuestion()">
+              <mat-icon
+                ><span class="material-icons-outlined">
+                  arrow_back
+                </span></mat-icon
+              >
+            </button></ng-container
+          >
+
+          <button
+            mat-mini-fab
+            (click)="toggleBookmark()"
+            style="background-color: yellow; color: black"
+          >
+            <mat-icon>bookmark</mat-icon>
+          </button>
+
+          <ng-container *ngIf="currentQuestion < totalQuestions - 1">
+            <button mat-mini-fab color="primary" (click)="nextQuestion()">
+              <mat-icon
+                ><span class="material-icons-outlined">
+                  arrow_forward
+                </span></mat-icon
+              >
+            </button></ng-container
+          >
+          <ng-container *ngIf="currentQuestion === totalQuestions - 1">
+            <button mat-raised-button color="primary" (click)="onSubmit()">
+              Submit
+            </button></ng-container
+          >
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

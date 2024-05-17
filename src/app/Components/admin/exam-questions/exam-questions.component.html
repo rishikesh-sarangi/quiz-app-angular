@@ -1,0 +1,44 @@
+<div class="exam-questions">
+  <form
+    [formGroup]="questionReactiveForm"
+    (ngSubmit)="onSubmit()"
+    fxLayout="column"
+    style="margin: 20px 50px"
+  >
+    <mat-form-field>
+      <mat-label>Question Type</mat-label>
+      <input matInput formControlName="questionType" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Question</mat-label>
+      <input matInput formControlName="question" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Option 1</mat-label>
+      <input matInput formControlName="option1" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Option 2</mat-label>
+      <input matInput formControlName="option2" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Option 3</mat-label>
+      <input matInput formControlName="option3" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Option 4</mat-label>
+      <input matInput formControlName="option4" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Answer</mat-label>
+      <input matInput formControlName="answer" required />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>
