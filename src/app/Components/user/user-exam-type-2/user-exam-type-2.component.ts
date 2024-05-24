@@ -11,6 +11,8 @@ import {
 import { ExamQuestionsService } from 'src/app/Shared/Services/exam-questions.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MultiUseDialogComponent } from 'src/app/Shared/multi-use-dialog/multi-use-dialog.component';
+import { ExamResultService } from 'src/app/Shared/Services/exam-result.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user-exam-type-2',
   standalone: true,
@@ -29,16 +31,20 @@ export class UserExamType2Component implements OnInit {
   totalUnattended: number = 0;
   totalQuestions!: number;
   isExamFinished: boolean = false;
-
+  examID!: number;
   constructor(
     private examQuestionService: ExamQuestionsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private examResultService: ExamResultService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getQuestions();
-    // console.log(this.questionArray);
+    this.activatedRoute.params.subscribe((params) => {
+      this.examID = parseInt(params['id']);
+    });
 
+    this.getQuestions();
     // console.log(this.userAnswers);
     this.examReactiveForm = new FormGroup({
       selectedAnswer: new FormControl(null, [Validators.required]),
@@ -51,8 +57,26 @@ export class UserExamType2Component implements OnInit {
         for (const obj of data) {
           this.questionArray.push(obj);
         }
-        this.userAnswers = new Array(data.length).fill(null);
-        this.totalQuestions = data.length;
+
+        this.examQuestionService.getAptitudeQuestions().subscribe({
+          next: (data) => {
+            for (const obj of data) {
+              this.questionArray.push(obj);
+            }
+
+            this.examQuestionService.getLogicalReasoningQuestions().subscribe({
+              next: (data) => {
+                for (const obj of data) {
+                  this.questionArray.push(obj);
+                }
+                this.userAnswers = new Array(this.questionArray.length).fill(
+                  null
+                );
+                this.totalQuestions = this.questionArray.length;
+              },
+            });
+          },
+        });
       },
       error: (err) => {
         console.log(err);
@@ -61,7 +85,11 @@ export class UserExamType2Component implements OnInit {
   }
 
   onSubmit() {
-    const dialogRef = this.dialog.open(MultiUseDialogComponent);
+    const dialogRef = this.dialog.open(MultiUseDialogComponent, {
+      data: {
+        examType2Submit: 'Are you sure you want to submit ?',
+      },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.calculateResults();
@@ -76,6 +104,7 @@ export class UserExamType2Component implements OnInit {
   }
 
   calculateResults() {
+    // console.log(this.userAnswers);
     for (let i = 0; i < this.questionArray.length; i++) {
       if (this.userAnswers[i] === this.questionArray[i].answer) {
         this.totalCorrect++;
@@ -85,8 +114,11 @@ export class UserExamType2Component implements OnInit {
         this.totalWrong++;
       }
     }
-    console.log('Total Correct:', this.totalCorrect);
-    console.log('Total Wrong:', this.totalWrong);
-    console.log('Total Unattended', this.totalUnattended);
+
+    this.examResultService
+      .updateExamResults(this.examID, {
+        totalMarks: this.totalCorrect,
+      })
+      .subscribe();
   }
 }

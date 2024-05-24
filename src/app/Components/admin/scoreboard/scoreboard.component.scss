@@ -1,0 +1,14 @@
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive > .table {
+  margin-bottom: 0;
+}
+
+.scoreboard-component {
+  margin: 0px 50px;
+}

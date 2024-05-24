@@ -163,53 +163,57 @@
   ],
   "examType": [
     {
-      "date": "2024-05-17T05:37:03.915Z",
-      "type": 1,
+      "date": "2024-05-24T16:48:25.631Z",
+      "type": 2,
       "id": 1
     }
   ],
   "examResults": [
     {
-      "date": "2024-05-17T05:37:03.915Z",
+      "date": "2024-05-24T11:09:52.818Z",
       "examType": 1,
-      "userName": "rishikesh",
-      "emailID": "rishikesh@gmail.com",
-      "id": 1
+      "userName": "Rishikesh",
+      "emailID": "Rishikesh@gmail.com",
+      "id": 1,
+      "generalKnowledgeMarks": 0,
+      "aptitudeMarks": 0,
+      "logicalReasoningMarks": 2
     },
     {
-      "date": "2024-05-17T05:37:03.915Z",
+      "date": "2024-05-24T15:21:47.907Z",
       "examType": 1,
-      "userName": "ananya",
-      "emailID": "anany@gmail.com",
-      "id": 2
+      "userName": "Vikash",
+      "emailID": "vikash@gmail.com",
+      "id": 2,
+      "generalKnowledgeMarks": 4,
+      "aptitudeMarks": 6,
+      "logicalReasoningMarks": 4
     },
     {
-      "date": "2024-05-17T05:37:03.915Z",
+      "date": "2024-05-24T15:21:47.907Z",
       "examType": 1,
-      "userName": "test",
-      "emailID": "test@gmail.com",
-      "id": 3
+      "userName": "Ajanta",
+      "emailID": "ajanta@gmail.com",
+      "id": 3,
+      "generalKnowledgeMarks": 1,
+      "aptitudeMarks": 0,
+      "logicalReasoningMarks": 0
     },
     {
-      "date": "2024-05-17T05:37:03.915Z",
-      "examType": 1,
-      "userName": "rishikesh",
-      "emailID": "rishikesh@gmaiul.com",
-      "id": 4
+      "date": "2024-05-24T16:01:50.865Z",
+      "examType": 2,
+      "userName": "Dinesh",
+      "emailID": "dinesh@gmail.com",
+      "id": 4,
+      "totalMarks": 9
     },
     {
-      "date": "2024-05-17T05:37:03.915Z",
-      "examType": 1,
-      "userName": "asdas",
-      "emailID": "dsad@dsa",
-      "id": 5
-    },
-    {
-      "date": "2024-05-17T05:37:03.915Z",
-      "examType": 1,
-      "userName": "Rishikesh ",
-      "emailID": "rishikesH@gmail.com",
-      "id": 6
+      "date": "2024-05-24T16:48:25.631Z",
+      "examType": 2,
+      "userName": "Vinash",
+      "emailID": "vinash@gmail.com",
+      "id": 5,
+      "totalMarks": 8
     }
   ]
 }

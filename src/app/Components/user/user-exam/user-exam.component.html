@@ -1,17 +1,26 @@
 <div class="user-exam-component">
   <ng-container *ngIf="!isExamFinished">
-    <mat-tab-group>
-      <mat-tab label="General Knowledge"
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="General Knowledge" [disabled]="disabledTabs[0]"
         ><app-exam-tab-1
           [questionArray]="generalKnowledgeQuestions"
+          [currentTabIndex]="currentTabIndex"
+          (nextTab)="switchToNextTab()"
         ></app-exam-tab-1
       ></mat-tab>
-      <mat-tab label="Aptitude">
-        <app-exam-tab-1 [questionArray]="aptitudeQuestions"></app-exam-tab-1
+      <mat-tab label="Aptitude" [disabled]="disabledTabs[1]">
+        <app-exam-tab-1
+          [questionArray]="aptitudeQuestions"
+          [currentTabIndex]="currentTabIndex"
+          (nextTab)="switchToNextTab()"
+        ></app-exam-tab-1
       ></mat-tab>
-      <mat-tab label="Logical Reasoning">
+      <mat-tab label="Logical Reasoning" [disabled]="disabledTabs[2]">
         <app-exam-tab-1
           [questionArray]="logicalReasoningQuestions"
+          [currentTabIndex]="currentTabIndex"
+          (nextTab)="switchToNextTab()"
+          (isExamFinished)="getScores($event)"
         ></app-exam-tab-1>
       </mat-tab>
     </mat-tab-group>
@@ -24,16 +33,12 @@
       style="margin-top: 50px"
     >
       <mat-card class="each-question">
-        <h1>You have scored {{ totalCorrect }} out of {{ totalQuestions }}.</h1>
-        <div style="font-size: 15px">
-          Total Correct Answers: {{ totalCorrect }}
-        </div>
-        <div style="font-size: 15px">
-          Total Wrong Answers : {{ totalWrong }}
-        </div>
-        <div style="font-size: 15px">
-          Total Unattended : {{ totalUnattended }}
-        </div>
+        <h1 style="text-decoration: underline; text-align: center">
+          Your Score
+        </h1>
+        <div>General Knowledge : {{ generalKnowledgeMarks }}</div>
+        <div>Aptitude : {{ aptitudeMarks }}</div>
+        <div>Logical Reasoning : {{ logicalReasoningMarks }}</div>
       </mat-card>
     </div>
   </ng-container>

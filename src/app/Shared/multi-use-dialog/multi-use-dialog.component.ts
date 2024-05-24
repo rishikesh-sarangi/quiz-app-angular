@@ -12,4 +12,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MultiUseDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  nextTabWarning: string = this.data.nextTabWarning;
+  submitWarning: string = this.data.submitWarning;
+  examType2Submit: string = this.data.examType2Submit;
 }

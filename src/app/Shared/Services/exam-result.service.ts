@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +12,17 @@ export class ExamResultService {
 
   addExamResults(data: any): Observable<any> {
     return this._http.post(this.endpoint, data);
+  }
+
+  updateExamResults(id: number, data: any): Observable<any> {
+    return this._http.patch(`${this.endpoint}/${id}`, data);
+  }
+
+  getExamResults(): Observable<any> {
+    return this._http.get(this.endpoint);
+  }
+
+  getExamResultsByID(id: number): Observable<any> {
+    return this._http.get(`${this.endpoint}/${id}`);
   }
 }

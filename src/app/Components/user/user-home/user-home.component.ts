@@ -15,6 +15,7 @@ import {
 import { Router } from '@angular/router';
 import { ExamTypeService } from 'src/app/Shared/Services/exam-type.service';
 import { ExamResultService } from 'src/app/Shared/Services/exam-result.service';
+import { Observable, map } from 'rxjs';
 @Component({
   selector: 'app-user-home',
   standalone: true,
@@ -41,6 +42,69 @@ export class UserHomeComponent {
     });
   }
 
+  private checkUserExists(payload: any): Observable<boolean> {
+    return this.examResultService.getExamResults().pipe(
+      map((results: any) => {
+        return results.some(
+          (obj: any) =>
+            obj.date === payload.date &&
+            obj.userName === payload.userName &&
+            obj.emailID === payload.emailID &&
+            obj.examType === payload.examType
+        );
+      })
+    );
+  }
+
+  private updateExamResult(payload: any) {
+    this.examResultService.getExamResults().subscribe({
+      next: (data) => {
+        for (const obj of data) {
+          if (
+            obj.date === payload.date &&
+            obj.userName === payload.userName &&
+            obj.emailID === payload.emailID
+          ) {
+            this.examResultService
+              .updateExamResults(obj.id, payload)
+              .subscribe({
+                next: (data) => {
+                  this.router.navigate([
+                    'user',
+                    'exam',
+                    data.examType === 2 ? 'examType2' : 'examType1',
+                    `${data.id}`,
+                  ]);
+                },
+                error: (err) => {
+                  console.log(err);
+                },
+              });
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  private createExamResult(payload: any) {
+    this.examResultService.addExamResults(payload).subscribe({
+      next: (data) => {
+        this.router.navigate([
+          'user',
+          'exam',
+          data.examType === 2 ? 'examType2' : 'examType1',
+          `${data.id}`,
+        ]);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   onSubmit() {
     if (this.userReactiveForm.valid) {
       this.examTypeService.getExamType().subscribe({
@@ -51,19 +115,14 @@ export class UserHomeComponent {
             ...this.userReactiveForm.value,
           };
 
-          this.examResultService.addExamResults(payload).subscribe({
-            next: (data) => {
-              // console.log(data.examType);
-              this.router.navigate([
-                'user',
-                'exam',
-                data.examType === 2 ? 'examType2' : 'examType1',
-                `examID=${data.id}`,
-              ]);
-            },
-            error: (err) => {
-              console.log(err);
-            },
+          this.checkUserExists(payload).subscribe((exists: any) => {
+            if (exists) {
+              // Update existing exam result
+              this.updateExamResult(payload);
+            } else {
+              // Create new exam result
+              this.createExamResult(payload);
+            }
           });
         },
         error: (err) => {

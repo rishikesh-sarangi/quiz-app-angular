@@ -10,9 +10,23 @@
 
   <mat-divider></mat-divider>
 
-  <div mat-dialog-content class="dialogue-content">
-    Are you sure you want to Submit ?
-  </div>
+  <ng-container *ngIf="submitWarning">
+    <div mat-dialog-content class="dialogue-content">
+      Are you sure you want to Submit ?
+    </div></ng-container
+  >
+
+  <ng-container *ngIf="nextTabWarning">
+    <div mat-dialog-content class="dialogue-content">
+      {{ nextTabWarning }}
+    </div></ng-container
+  >
+
+  <ng-container *ngIf="examType2Submit">
+    <div mat-dialog-content class="dialogue-content">
+      {{ examType2Submit }}
+    </div>
+  </ng-container>
 
   <mat-dialog-actions class="action-btns" align="end">
     <button mat-raised-button color="primary" [mat-dialog-close]="true">

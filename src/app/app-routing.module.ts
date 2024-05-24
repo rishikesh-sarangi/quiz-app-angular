@@ -4,12 +4,12 @@ import { LoginComponent } from '../app/Shared/login/login.component';
 import { HeaderComponent } from './Components/admin/header/header.component';
 import { HomeComponent } from './Components/admin/home/home.component';
 import { authGuardAdmin, authGuardUser } from './guard.guard';
-import { DashboardComponent } from './Components/admin/dashboard/dashboard.component';
 import { UserHeaderComponent } from './Components/user/user-header/user-header.component';
 import { UserHomeComponent } from './Components/user/user-home/user-home.component';
 import { UserExamComponent } from './Components/user/user-exam/user-exam.component';
 import { UserExamType2Component } from './Components/user/user-exam-type-2/user-exam-type-2.component';
 import { ExamQuestionsComponent } from './Components/admin/exam-questions/exam-questions.component';
+import { ScoreboardComponent } from './Components/admin/scoreboard/scoreboard.component';
 
 const routes: Routes = [
   {
@@ -26,8 +26,8 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'dashboard',
-        component: DashboardComponent,
+        path: 'scoreboard',
+        component: ScoreboardComponent,
       },
       {
         path: 'exam-question',

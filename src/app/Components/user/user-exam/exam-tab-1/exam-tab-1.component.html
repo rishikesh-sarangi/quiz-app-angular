@@ -1,5 +1,6 @@
 <div fxLayout="row" style="height: 100dvh" fxLayoutGap="10px">
   <!-- left-side -->
+
   <div class="left-side-container">
     <!-- question selector -->
     <mat-card class="question-panel">
@@ -137,8 +138,21 @@
             </button></ng-container
           >
           <ng-container *ngIf="currentQuestion === totalQuestions - 1">
-            <button mat-raised-button color="primary" (click)="onSubmit()">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              *ngIf="currentTabIndex === 2"
+            >
               Submit
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onNextTab()"
+              *ngIf="currentTabIndex === 0 || currentTabIndex === 1"
+            >
+              Next Section
             </button></ng-container
           >
         </div>

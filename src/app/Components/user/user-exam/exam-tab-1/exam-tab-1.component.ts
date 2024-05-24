@@ -1,9 +1,12 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
@@ -11,6 +14,10 @@ import { ExamQuestionsService } from 'src/app/Shared/Services/exam-questions.ser
 import { FormsModule } from '@angular/forms';
 import { MultiUseDialogComponent } from 'src/app/Shared/multi-use-dialog/multi-use-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserExamComponent } from '../user-exam.component';
+import { MatTabGroup } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
+import { ExamResultService } from 'src/app/Shared/Services/exam-result.service';
 @Component({
   selector: 'app-exam-tab-1',
   standalone: true,
@@ -18,8 +25,12 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './exam-tab-1.component.html',
   styleUrls: ['./exam-tab-1.component.scss'],
 })
-export class ExamTab1Component implements OnInit, OnChanges {
+export class ExamTab1Component implements OnChanges, OnInit {
   @Input() questionArray: any[] = [];
+  @Input() currentTabIndex: number = 0;
+
+  @Output() nextTab = new EventEmitter<void>();
+  @Output() isExamFinished = new EventEmitter<boolean>(false);
 
   userAnswers: string[] = [];
 
@@ -30,25 +41,46 @@ export class ExamTab1Component implements OnInit, OnChanges {
   totalWrong: number = 0;
   totalUnattended: number = 0;
   totalQuestions!: number;
-  isExamFinished: boolean = false;
 
   selectedAnswer!: any;
 
+  examID!: number;
+
   constructor(
     private examQuestionService: ExamQuestionsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private examResultService: ExamResultService
   ) {}
 
   ngOnInit(): void {
-    this.questionArray.length = 0;
-    this.userAnswers.length = 0;
-    this.bookmarkedQuestions.clear();
+    this.activatedRoute.params.subscribe((params) => {
+      this.examID = parseInt(params['id']);
+    });
+
+    // console.log(this.examID);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const newQuestionArray = changes['questionArray'].currentValue;
-    this.userAnswers = new Array(newQuestionArray.length).fill(null);
-    this.totalQuestions = newQuestionArray.length;
+  ngOnChanges(): void {
+    this.userAnswers = new Array(this.questionArray.length).fill(null);
+    this.totalQuestions = this.questionArray.length;
+    // console.log(this.examID);
+  }
+
+  onNextTab() {
+    // console.log(this.currentTabIndex);
+    const dialogRef = this.dialog.open(MultiUseDialogComponent, {
+      data: {
+        nextTabWarning:
+          'Are you sure you want to go to next tab? You cannot visit previous tabs.',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.calculateResults();
+        this.nextTab.emit();
+      }
+    });
   }
 
   selectQuestion(index: number) {
@@ -93,17 +125,19 @@ export class ExamTab1Component implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    const dialogRef = this.dialog.open(MultiUseDialogComponent);
+    const dialogRef = this.dialog.open(MultiUseDialogComponent, {
+      data: {
+        submitWarning: 'Are you sure you want to submit?',
+      },
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.calculateResults();
-        this.isExamFinished = true;
       }
     });
   }
 
   calculateResults() {
-    this.isExamFinished = true;
     for (let i = 0; i < this.totalQuestions; i++) {
       if (this.userAnswers[i] === this.questionArray[i].answer) {
         this.totalCorrect++;
@@ -114,9 +148,36 @@ export class ExamTab1Component implements OnInit, OnChanges {
       }
     }
 
-    console.log(this.userAnswers);
-    console.log('Total Correct:', this.totalCorrect);
-    console.log('Total Wrong:', this.totalWrong);
-    console.log('Total Unattended', this.totalUnattended);
+    // console.log(this.userAnswers);
+    // console.log('Total Correct:', this.totalCorrect);
+    // console.log('Total Wrong:', this.totalWrong);
+    // console.log('Total Unattended', this.totalUnattended);
+
+    if (this.currentTabIndex === 0) {
+      this.examResultService
+        .updateExamResults(this.examID, {
+          generalKnowledgeMarks: this.totalCorrect,
+        })
+        .subscribe((data) => {
+          // console.log(data);
+        });
+    } else if (this.currentTabIndex === 1) {
+      this.examResultService
+        .updateExamResults(this.examID, {
+          aptitudeMarks: this.totalCorrect,
+        })
+        .subscribe((data) => {
+          // console.log(data);
+        });
+    } else {
+      this.examResultService
+        .updateExamResults(this.examID, {
+          logicalReasoningMarks: this.totalCorrect,
+        })
+        .subscribe((data) => {
+          // console.log(data);
+          this.isExamFinished.emit(true);
+        });
+    }
   }
 }
