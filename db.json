@@ -163,8 +163,8 @@
   ],
   "examType": [
     {
-      "date": "2024-05-24T16:48:25.631Z",
-      "type": 2,
+      "date": "2024-05-24T16:54:03.276Z",
+      "type": 1,
       "id": 1
     }
   ],
@@ -214,6 +214,16 @@
       "emailID": "vinash@gmail.com",
       "id": 5,
       "totalMarks": 8
+    },
+    {
+      "date": "2024-05-24T16:54:03.276Z",
+      "examType": 1,
+      "userName": "Shristhi",
+      "emailID": "shristhi@gmail.com",
+      "id": 6,
+      "generalKnowledgeMarks": 2,
+      "aptitudeMarks": 6,
+      "logicalReasoningMarks": 4
     }
   ]
 }
